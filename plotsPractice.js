@@ -58,3 +58,26 @@ var layout = {
   title: "'Pie' Chart",
 };
 Plotly.newPlot("plotArea", data, layout);
+
+// Read the data
+d3.json("samples.json").then(function (data) {
+  console.log(data);
+});
+
+// Delete null values from the sorted array of wfreq
+d3.json("samples.json").then(function (data) {
+  wfreq = data.metadata.map((person) => person.wfreq).sort((a, b) => b - a);
+  filteredWfreq = wfreq.filter((element) => element != null);
+  console.log(filteredWfreq);
+});
+
+// Display the metadata of first individual from the dataset
+d3.json("samples.json").then(function (data) {
+  firstPerson = data.metadata[0];
+  Object.entries(firstPerson).forEach(([key, value]) => {
+    console.log(key + ": " + value);
+  });
+});
+
+// CORS stands for Cross-Origin Resource Sharing. In short, browsers by default do not permit reading of resources
+// from multiple sources. This restriction is in place because of security concerns.
